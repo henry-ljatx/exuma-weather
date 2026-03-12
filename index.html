@@ -729,6 +729,7 @@
                 startIndex = 1; // Skip yesterday
             }
 
+            const hourly = weatherData?.hourly;
             const daysToShow = Math.min(10, daily.time.length - startIndex);
             for (let i = 0; i < daysToShow; i++) {
                 const idx = startIndex + i;
@@ -738,7 +739,19 @@
                 const high = Math.round(daily.temperature_2m_max[idx]);
                 const low = Math.round(daily.temperature_2m_min[idx]);
                 const code = daily.weather_code[idx];
-                const precip = daily.precipitation_probability_max[idx] || 0;
+                
+                // Calculate daily rain as max of three periods (same as modal)
+                let displayPrecip = 0;
+                if (hourly) {
+                    const dayStart = new Date(date).setHours(0, 0, 0, 0);
+                    const dayEnd = new Date(date).setHours(23, 59, 59, 999);
+                    const morningRain = getMaxRainForPeriod(hourly, dayStart, dayEnd, 6, 12);
+                    const afternoonRain = getMaxRainForPeriod(hourly, dayStart, dayEnd, 12, 18);
+                    const eveningRain = getMaxRainForPeriod(hourly, dayStart, dayEnd, 18, 24);
+                    displayPrecip = Math.max(morningRain, afternoonRain, eveningRain);
+                } else {
+                    displayPrecip = daily.precipitation_probability_max[idx] || 0;
+                }
 
                 const div = document.createElement('div');
                 div.className = 'forecast-card';
@@ -751,7 +764,7 @@
                         <div class="forecast-high">${high}°</div>
                         <div class="forecast-low">${low}°</div>
                     </div>
-                    ${precip > 20 ? `<div class="forecast-chance">💧 ${precip}%</div>` : ''}
+                    ${displayPrecip > 20 ? `<div class="forecast-chance">💧 ${displayPrecip}%</div>` : ''}
                     <div style="font-size: 11px; color: var(--accent); margin-top: 4px;">Click for details</div>
                 `;
                 container.appendChild(div);
