@@ -1,25 +1,86 @@
 {
-  "timestamp": "2026-03-23T15:56:00Z",
+  "timestamp": "2026-03-23T17:16:08.266Z",
   "summary": {
-    "today": 0.00195,
-    "weekToDate": 0.00195,
-    "monthToDate": 0.00195,
+    "today": 0.5928,
+    "weekToDate": 0.5928,
+    "monthToDate": 0.5928,
     "dailyBudget": 20,
     "weeklyBudget": 150,
     "monthlyBudget": 300,
-    "dailyPct": "0.0",
-    "weeklyPct": "0.0",
-    "monthlyPct": "0.0"
+    "dailyPct": "3.0",
+    "weeklyPct": "0.4",
+    "monthlyPct": "0.2"
   },
   "costs": [
     {
       "date": "2026-03-23",
-      "service": "openai",
-      "job_name": "Morning Brief",
+      "job_name": "Morning News Brief",
+      "service": "anthropic",
+      "model": "anthropic/claude-haiku-4-5",
+      "input_tokens": 130000,
+      "output_tokens": 4500,
+      "cost_usd": 0.122,
+      "created_at": "2026-03-23T17:16:08.266Z"
+    },
+    {
+      "date": "2026-03-23",
+      "job_name": "Nightly Ideas Report",
+      "service": "anthropic",
+      "model": "anthropic/claude-haiku-4-5",
+      "input_tokens": 40000,
+      "output_tokens": 2500,
+      "cost_usd": 0.042,
+      "created_at": "2026-03-23T17:16:08.266Z"
+    },
+    {
+      "date": "2026-03-23",
+      "job_name": "Self-Improvement Scan",
+      "service": "anthropic",
+      "model": "anthropic/claude-haiku-4-5",
+      "input_tokens": 195000,
+      "output_tokens": 16000,
+      "cost_usd": 0.22,
+      "created_at": "2026-03-23T17:16:08.266Z"
+    },
+    {
+      "date": "2026-03-23",
+      "job_name": "Weekly Manifest Reflection",
+      "service": "anthropic",
+      "model": "anthropic/claude-haiku-4-5",
+      "input_tokens": 23000,
+      "output_tokens": 900,
+      "cost_usd": 0.022,
+      "created_at": "2026-03-23T17:16:08.266Z"
+    },
+    {
+      "date": "2026-03-23",
+      "job_name": "Daily Self-Improvement Ritual",
+      "service": "anthropic",
+      "model": "anthropic/claude-haiku-4-5",
+      "input_tokens": 159000,
+      "output_tokens": 8600,
+      "cost_usd": 0.1616,
+      "created_at": "2026-03-23T17:16:08.266Z"
+    },
+    {
+      "date": "2026-03-23",
+      "job_name": "Nightly Reflection & TODO Review",
+      "service": "anthropic",
+      "model": "anthropic/claude-haiku-4-5",
       "input_tokens": 5000,
+      "output_tokens": 1300,
+      "cost_usd": 0.0092,
+      "created_at": "2026-03-23T17:16:08.266Z"
+    },
+    {
+      "date": "2026-03-23",
+      "job_name": "OAuth Token Self-Healer (Silent)",
+      "service": "anthropic",
+      "model": "anthropic/claude-haiku-4-5",
+      "input_tokens": 10000,
       "output_tokens": 2000,
-      "cost_usd": 0.00195,
-      "created_at": "2026-03-23 11:13:20"
+      "cost_usd": 0.016,
+      "created_at": "2026-03-23T17:16:08.266Z"
     }
   ],
   "alerts": [],
