@@ -631,7 +631,39 @@
          */
         function updateHealthStatus() {
             const health = costData.health || {};
-            // In a real implementation, would fetch actual health data
+            const healthHtml = `
+                <div class="status-item">
+                    <span class="status-label">Gmail OAuth</span>
+                    <span class="status-badge ${health.gmail?.status === 'valid' ? 'valid' : 'blocker'}">
+                        ${health.gmail?.status === 'valid' ? '✓ Valid' : '✗ Expired'}
+                    </span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Telegram Bot Token</span>
+                    <span class="status-badge ${health.telegram?.status === 'valid' ? 'valid' : 'blocker'}">
+                        ${health.telegram?.status === 'valid' ? '✓ Valid' : '✗ Missing'}
+                    </span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Google Gemini API</span>
+                    <span class="status-badge ${health.google?.status === 'valid' ? 'valid' : 'blocker'}">
+                        ${health.google?.status === 'valid' ? '✓ Valid' : '✗ Expired'}
+                    </span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Twilio Credentials</span>
+                    <span class="status-badge ${health.twilio?.status === 'valid' ? 'valid' : 'blocker'}">
+                        ${health.twilio?.status === 'valid' ? '✓ Valid' : '✗ Outdated'}
+                    </span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Cron Health</span>
+                    <span class="status-badge ${health.cron?.successRate >= 90 ? 'valid' : 'blocker'}">
+                        ${health.cron?.successRate || '--'}% Success
+                    </span>
+                </div>
+            `;
+            document.getElementById('healthStatus').innerHTML = healthHtml;
         }
 
         /**

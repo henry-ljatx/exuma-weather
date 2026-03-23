@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-23T11:13:57.361Z",
+  "timestamp": "2026-03-23T12:47:00Z",
   "summary": {
     "today": 0.00195,
     "weekToDate": 0.00195,
@@ -25,16 +25,27 @@
   "alerts": [],
   "health": {
     "gmail": {
-      "status": "valid",
-      "lastCheck": "2026-03-23T11:13:57.361Z"
+      "status": "blocker",
+      "lastCheck": "2026-03-23T03:00:00Z",
+      "message": "Token expired (March 15)"
     },
     "telegram": {
       "status": "valid",
-      "lastCheck": "2026-03-23T11:13:57.361Z"
+      "lastCheck": "2026-03-23T12:47:00Z"
+    },
+    "google": {
+      "status": "blocker",
+      "lastCheck": "2026-03-23T08:00:00Z",
+      "message": "OpenAI API key invalid - affects memory search"
+    },
+    "twilio": {
+      "status": "blocker",
+      "lastCheck": "2026-03-23T06:00:00Z",
+      "message": "Token rotated March 7 - Render not updated"
     },
     "cron": {
-      "successRate": 95,
-      "lastCheck": "2026-03-23T11:13:57.361Z"
+      "successRate": 85,
+      "lastCheck": "2026-03-23T12:47:00Z"
     }
   }
 }
