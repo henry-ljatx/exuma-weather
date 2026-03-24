@@ -4615,6 +4615,29 @@
     }
   },
   "alerts": [],
+  "health": {
+    "gmail": {
+      "status": "valid",
+      "lastChecked": "2026-03-24T16:53:45.708Z"
+    },
+    "telegram": {
+      "status": "valid",
+      "lastChecked": "2026-03-24T16:53:45.708Z"
+    },
+    "google": {
+      "status": "valid",
+      "lastChecked": "2026-03-24T16:53:45.708Z"
+    },
+    "twilio": {
+      "status": "blocker",
+      "lastChecked": "2026-03-24T16:53:45.708Z"
+    },
+    "cron": {
+      "successRate": 95,
+      "status": "valid",
+      "lastChecked": "2026-03-24T16:53:45.708Z"
+    }
+  },
   "costLastUpdated": "2026-03-24T16:53:45.708Z",
   "sourceBreakdown": {
     "cron": 4.01,

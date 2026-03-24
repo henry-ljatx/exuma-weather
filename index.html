@@ -499,6 +499,7 @@
             <!-- Cost by Source (Cron vs Sub-agent vs Session) -->
             <div class="widget">
                 <div class="widget-title">🔍 Cost by Source</div>
+                <div style="font-size: 11px; color: #666; margin-bottom: 15px;" id="sourceSubtitle">Month-to-Date</div>
                 <div class="chart-container">
                     <canvas id="sourceChart"></canvas>
                 </div>
@@ -507,6 +508,7 @@
             <!-- Cost by Service -->
             <div class="widget">
                 <div class="widget-title">📊 Cost by Service</div>
+                <div style="font-size: 11px; color: #666; margin-bottom: 15px;" id="serviceSubtitle">Month-to-Date</div>
                 <div class="chart-container">
                     <canvas id="serviceChart"></canvas>
                 </div>
@@ -515,6 +517,7 @@
             <!-- Cost by Job -->
             <div class="widget">
                 <div class="widget-title">📋 Cost by Job</div>
+                <div style="font-size: 11px; color: #666; margin-bottom: 15px;" id="jobSubtitle">Month-to-Date</div>
                 <div class="chart-container">
                     <canvas id="jobChart"></canvas>
                 </div>
@@ -705,11 +708,58 @@
             updateCostSummary();
             updateProviderCharts();
             updateCharts();
+            updateTimeRangeLabels();
             updateHealthStatus();
             updateTaskExecutionMetrics();
             updateDecisionVelocity();
             updateAutonomyScoring();
             updateTimestamps();
+        }
+
+        /**
+         * Update time range labels for cost widgets
+         */
+        function updateTimeRangeLabels() {
+            const costs = costData.costs || [];
+            if (costs.length === 0) return;
+
+            // Extract all dates and determine the date range
+            const dates = costs.map(c => new Date(c.date)).sort((a, b) => a - b);
+            const minDate = dates[0];
+            const maxDate = dates[dates.length - 1];
+
+            // Determine the time period label
+            let timeLabel = 'Month-to-Date';
+            const today = new Date();
+            const yesterday = new Date(today);
+            yesterday.setDate(yesterday.getDate() - 1);
+
+            if (maxDate.toDateString() === today.toDateString()) {
+                timeLabel = 'Today';
+            } else if (maxDate.toDateString() === yesterday.toDateString()) {
+                timeLabel = 'Yesterday';
+            } else {
+                // Check if it spans a month
+                const daysDiff = Math.floor((maxDate - minDate) / (1000 * 60 * 60 * 24));
+                if (daysDiff <= 7) {
+                    timeLabel = 'Last 7 Days';
+                } else if (daysDiff <= 30) {
+                    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+                        'July', 'August', 'September', 'October', 'November', 'December'];
+                    const minMonth = minDate.getMonth();
+                    const maxMonth = maxDate.getMonth();
+                    if (minMonth === maxMonth) {
+                        timeLabel = monthNames[maxMonth];
+                    } else {
+                        timeLabel = `${monthNames[minMonth]} - ${monthNames[maxMonth]}`;
+                    }
+                }
+            }
+
+            // Update all three cost widget subtitles
+            document.getElementById('sourceSubtitle').textContent = timeLabel;
+            document.getElementById('serviceSubtitle').textContent = timeLabel;
+            document.getElementById('jobSubtitle').textContent = timeLabel;
         }
 
         /**
