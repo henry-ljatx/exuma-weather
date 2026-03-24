@@ -1,15 +1,15 @@
 {
   "timestamp": "2026-03-24T16:53:45.708Z",
   "summary": {
-    "today": 0.89,
-    "weekToDate": 1.29,
-    "monthToDate": 4.67,
+    "today": 2.14,
+    "weekToDate": 3.00,
+    "monthToDate": 5.94,
     "dailyBudget": 20,
     "weeklyBudget": 150,
     "monthlyBudget": 300,
-    "dailyPct": "4.5",
-    "weeklyPct": "0.9",
-    "monthlyPct": "1.6"
+    "dailyPct": "10.7",
+    "weeklyPct": "2.0",
+    "monthlyPct": "2.0"
   },
   "costs": [
     {
@@ -1863,9 +1863,9 @@
   ],
   "costByProvider": {
     "anthropic": {
-      "today": 0.22670000000000004,
-      "week": 0.6343999999999996,
-      "month": 2.9749999999999988,
+      "today": 1.61,
+      "week": 2.25,
+      "month": 4.04,
       "breakdown": [
         {
           "timestamp": 1772938881285,
@@ -3118,9 +3118,9 @@
       ]
     },
     "openai": {
-      "today": 0.657,
-      "week": 0.657,
-      "month": 1.6587000000000003,
+      "today": 0.50,
+      "week": 0.75,
+      "month": 1.80,
       "breakdown": [
         {
           "timestamp": 1772545281266,
@@ -3197,9 +3197,9 @@
       ]
     },
     "google": {
-      "today": 0,
-      "week": 0,
-      "month": 0.0292,
+      "today": 0.03,
+      "week": 0.03,
+      "month": 0.11,
       "breakdown": [
         {
           "timestamp": 1772967457480,

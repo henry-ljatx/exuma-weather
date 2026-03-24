@@ -687,13 +687,35 @@
         let costData = {};
 
         /**
-         * Fetch cost data from the local JSON file
+         * Fetch cost data from the local JSON file with aggressive cache-busting
          */
         async function fetchCostData() {
             try {
-                const response = await fetch('data.json?t=' + Date.now());
+                // Aggressive cache-busting strategy:
+                // 1. Use timestamp (milliseconds)
+                // 2. Add random parameter to prevent any caching
+                // 3. Add version number as fallback
+                const timestamp = Date.now();
+                const random = Math.random().toString(36).substring(2, 15);
+                const version = '1'; // Increment this when deploying
+                
+                const url = `data.json?v=${version}&t=${timestamp}&r=${random}`;
+                
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'Cache-Control': 'no-cache, no-store, must-revalidate, max-age=0',
+                        'Pragma': 'no-cache',
+                        'Expires': '0'
+                    },
+                    cache: 'no-store'
+                });
+                
                 if (!response.ok) throw new Error('Failed to fetch data');
                 costData = await response.json();
+                console.log(`✅ Data loaded fresh at ${new Date().toLocaleTimeString()}`);
+                console.log(`   URL: ${url}`);
+                console.log(`   Status: ${response.status} ${response.statusText}`);
                 updateDashboard();
             } catch (err) {
                 console.error('Error fetching cost data:', err);
