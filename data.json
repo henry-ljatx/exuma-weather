@@ -109,24 +109,24 @@
   },
   "health": {
     "gmail": {
-      "status": "Valid",
+      "status": "valid",
       "value": 1
     },
     "telegram": {
-      "status": "Valid",
+      "status": "valid",
       "value": 1
     },
     "google": {
-      "status": "Blocker",
+      "status": "blocker",
       "value": 0
     },
     "twilio": {
-      "status": "Blocker",
+      "status": "blocker",
       "value": 0
     },
     "cron": {
       "successRate": 95,
-      "status": "Valid",
+      "status": "valid",
       "value": 1
     }
   },
