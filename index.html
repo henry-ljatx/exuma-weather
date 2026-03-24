@@ -913,45 +913,42 @@
             });
         }
 
-        /**
+                /**
          * Update all chart visualizations
          */
         function updateCharts() {
             const costs = costData.costs || [];
 
-            // Prepare data by service
-            const serviceData = {};
-            const jobData = {};
+            // Prepare data by source, model (service), and trends
+            const sourceData = {};
+            const modelData = {};
             const trendData = {};
 
             costs.forEach(record => {
-                // By service
-                if (!serviceData[record.service]) serviceData[record.service] = 0;
-                serviceData[record.service] += record.cost_usd;
+                // By source (cron, subagent, session)
+                const source = record.source || 'unknown';
+                if (!sourceData[source]) sourceData[source] = 0;
+                sourceData[source] += record.cost || 0;
 
-                // By job
-                if (!jobData[record.job_name]) jobData[record.job_name] = 0;
-                jobData[record.job_name] += record.cost_usd;
+                // By model (using model as "service")
+                const model = record.model || 'unknown';
+                if (!modelData[model]) modelData[model] = 0;
+                modelData[model] += record.cost || 0;
 
                 // Trends by date
-                if (!trendData[record.date]) trendData[record.date] = 0;
-                trendData[record.date] += record.cost_usd;
+                const date = record.date || 'unknown';
+                if (!trendData[date]) trendData[date] = 0;
+                trendData[date] += record.cost || 0;
             });
 
-            // Service Chart (Pie)
-            const serviceLabels = Object.keys(serviceData);
-            const serviceValues = Object.values(serviceData);
-            const colors = generateColors(serviceLabels.length);
-
-            // Source Chart (Cron vs Sub-agent vs Session)
-            const sourceData = {
-                cron: costData.sourceSummary?.cron?.[period.toLowerCase()] || 0,
-                subagent: costData.sourceSummary?.subagent?.[period.toLowerCase()] || 0,
-                session: costData.sourceSummary?.session?.[period.toLowerCase()] || 0,
-            };
-
+            // Source Chart (Cron vs Sub-agent vs Session) - Pie
+            const sourceLabels = Object.keys(sourceData).map(s => {
+                if (s === 'cron') return 'Cron Jobs';
+                if (s === 'subagent') return 'Sub-agents';
+                if (s === 'session') return 'Sessions';
+                return s;
+            });
             const sourceValues = Object.values(sourceData);
-            const sourceLabels = ['Cron Jobs', 'Sub-agents', 'Sessions'];
             const sourceColors = ['#10b981', '#f59e0b', '#8b5cf6'];
 
             if (sourceChart) sourceChart.destroy();
@@ -962,7 +959,7 @@
                     labels: sourceLabels,
                     datasets: [{
                         data: sourceValues,
-                        backgroundColor: sourceColors,
+                        backgroundColor: sourceColors.slice(0, sourceValues.length),
                         borderColor: '#1a1f26',
                         borderWidth: 2,
                     }],
@@ -975,16 +972,31 @@
                             position: 'bottom',
                             labels: { color: '#e0e0e0', padding: 15, font: { size: 12 } },
                         },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const value = context.parsed;
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percent = total > 0 ? ((value / total) * 100).toFixed(1) : 0;
+                                    return `$${value.toFixed(2)} (${percent}%)`;
+                                }
+                            }
+                        }
                     },
                 },
             });
+
+            // Service Chart (by Model) - Pie
+            const serviceLabels = Object.keys(modelData).map(m => m.replace('_', ' '));
+            const serviceValues = Object.values(modelData);
+            const colors = generateColors(serviceLabels.length);
 
             if (serviceChart) serviceChart.destroy();
             const serviceCtx = document.getElementById('serviceChart').getContext('2d');
             serviceChart = new Chart(serviceCtx, {
                 type: 'doughnut',
                 data: {
-                    labels: serviceLabels.map(s => s.replace('_', ' ')),
+                    labels: serviceLabels,
                     datasets: [{
                         data: serviceValues,
                         backgroundColor: colors,
@@ -1000,13 +1012,29 @@
                             position: 'bottom',
                             labels: { color: '#e0e0e0', padding: 15, font: { size: 12 } },
                         },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const value = context.parsed;
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percent = total > 0 ? ((value / total) * 100).toFixed(1) : 0;
+                                    return `$${value.toFixed(2)} (${percent}%)`;
+                                }
+                            }
+                        }
                     },
                 },
             });
 
-            // Job Chart (Bar)
-            const jobLabels = Object.keys(jobData).sort((a, b) => jobData[b] - jobData[a]);
-            const jobValues = jobLabels.map(j => jobData[j]);
+            // Job Chart (by Provider) - Bar
+            const providerData = costData.costByProvider || {};
+            const jobLabels = Object.keys(providerData).map(p => 
+                p.charAt(0).toUpperCase() + p.slice(1)
+            );
+            const jobValues = jobLabels.map((_, i) => {
+                const provider = Object.keys(providerData)[i];
+                return (providerData[provider]?.month || 0);
+            });
 
             if (jobChart) jobChart.destroy();
             const jobCtx = document.getElementById('jobChart').getContext('2d');
@@ -1042,7 +1070,7 @@
                 },
             });
 
-            // Trend Chart (Line)
+            // Trend Chart (Line) - Last 30 Days
             const trendDates = Object.keys(trendData).sort();
             const trendValues = trendDates.map(d => trendData[d]);
 
@@ -1085,6 +1113,8 @@
                 },
             });
         }
+
+
 
         /**
          * Update health status indicators
