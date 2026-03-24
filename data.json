@@ -4644,5 +4644,81 @@
     "subagent": 0.66,
     "session": 0,
     "total": 4.66
-  }
+  },
+  "decisionMetrics": {
+    "avgDecisionHours": 4.2,
+    "avgBlockerHours": 5.8,
+    "decisionActionRatio": 0.72,
+    "totalDecisions": 8,
+    "trends": [
+      {
+        "date": "Mar 18",
+        "decisionHours": 3.5
+      },
+      {
+        "date": "Mar 19",
+        "decisionHours": 4.1
+      },
+      {
+        "date": "Mar 20",
+        "decisionHours": 3.7
+      },
+      {
+        "date": "Mar 21",
+        "decisionHours": 3.5
+      },
+      {
+        "date": "Mar 22",
+        "decisionHours": 3.5
+      },
+      {
+        "date": "Mar 23",
+        "decisionHours": 3.2
+      },
+      {
+        "date": "Mar 24",
+        "decisionHours": 4.4
+      }
+    ]
+  },
+  "autonomyMetrics": {
+    "autonomousPercent": 73,
+    "userInputPercent": 27,
+    "sevenDayTrend": 3,
+    "totalTasks": 15,
+    "trends": [
+      {
+        "date": "Mar 18",
+        "autonomousPercent": 70
+      },
+      {
+        "date": "Mar 19",
+        "autonomousPercent": 71
+      },
+      {
+        "date": "Mar 20",
+        "autonomousPercent": 72
+      },
+      {
+        "date": "Mar 21",
+        "autonomousPercent": 72
+      },
+      {
+        "date": "Mar 22",
+        "autonomousPercent": 73
+      },
+      {
+        "date": "Mar 23",
+        "autonomousPercent": 76
+      },
+      {
+        "date": "Mar 24",
+        "autonomousPercent": 79
+      }
+    ]
+  },
+  "costPeriod": "Month-to-Date",
+  "periodStart": "2026-03-01",
+  "periodEnd": "2026-03-24",
+  "periodLabel": "Month-to-Date (Mar 1 - Mar 24)"
 }
