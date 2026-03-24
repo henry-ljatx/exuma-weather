@@ -1,13 +1,13 @@
 {
   "timestamp": "2026-03-24T16:53:45.708Z",
   "summary": {
-    "today": 0.88,
+    "today": 0.89,
     "weekToDate": 1.29,
-    "monthToDate": 4.66,
+    "monthToDate": 4.67,
     "dailyBudget": 20,
     "weeklyBudget": 150,
     "monthlyBudget": 300,
-    "dailyPct": "4.4",
+    "dailyPct": "4.5",
     "weeklyPct": "0.9",
     "monthlyPct": "1.6"
   },
