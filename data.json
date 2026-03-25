@@ -1,15 +1,15 @@
 {
   "timestamp": "2026-03-25T01:27:30.986Z",
   "summary": {
-    "today": 6.89,
-    "weekToDate": 7.75,
-    "monthToDate": 10.7,
+    "today": 18.05,
+    "weekToDate": 24.47,
+    "monthToDate": 96.38,
     "dailyBudget": 20,
     "weeklyBudget": 150,
     "monthlyBudget": 300,
-    "dailyPct": "34.4",
-    "weeklyPct": "5.2",
-    "monthlyPct": "3.6",
+    "dailyPct": "90.3",
+    "weeklyPct": "16.3",
+    "monthlyPct": "32.1",
     "dataQuality": {
       "cronReal": 192,
       "subagentEstimated": 4,
@@ -18,7 +18,13 @@
     },
     "realSessionCosts": 85.24909204999993,
     "realSessionMessages": 1374,
-    "monthToDateWithRealSessions": 95.94909204999993
+    "monthToDateWithRealSessions": 95.94909204999993,
+    "sessionCosts": {
+      "today": 11.15552185000001,
+      "week": 16.72067580000002,
+      "month": 85.67827434999994,
+      "allTime": 85.67827434999994
+    }
   },
   "costs": [
     {
