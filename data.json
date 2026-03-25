@@ -15,7 +15,10 @@
       "subagentEstimated": 4,
       "sessionReal": 10,
       "totalEntries": 206
-    }
+    },
+    "realSessionCosts": 85.24909204999993,
+    "realSessionMessages": 1374,
+    "monthToDateWithRealSessions": 95.94909204999993
   },
   "costs": [
     {
@@ -5451,8 +5454,8 @@
     "bySource": {
       "cron": 4.19,
       "subagent": 6.45,
-      "session": 0.06,
-      "total": 10.7
+      "session": 85.24909204999993,
+      "total": 95.88909204999993
     }
   },
   "costLastUpdated": "2026-03-25T01:27:30.986Z"
