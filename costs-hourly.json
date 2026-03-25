@@ -1,0 +1,22 @@
+[
+  {
+    "hour": "2026-03-25T02",
+    "cost": 5.88,
+    "messages": 211,
+    "breakdown": {
+      "claude-opus-4-6": {
+        "count": 19,
+        "total": 1.436251
+      },
+      "gemini-3-pro-preview": {
+        "count": 4,
+        "total": 0.1794062
+      },
+      "claude-haiku-4-5": {
+        "count": 188,
+        "total": 4.26542805
+      }
+    },
+    "timestamp": "2026-03-25T02:06:14.236Z"
+  }
+]
