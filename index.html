@@ -754,7 +754,7 @@
                 
                 // Fallback 2: Direct data.json with aggressive cache-busting
                 console.log('Trying data.json with cache-busting...');
-                const fallbackUrl = `data.json?v=${version}&t=${timestamp}&r=${random}&s=${dateStr}`;
+                const fallbackUrl = `data-1774402584.json?v=${version}&t=${timestamp}&r=${random}&s=${dateStr}`;
                 const fallbackResponse = await fetch(fallbackUrl, { cache: 'no-store' });
                 if (!fallbackResponse.ok) throw new Error(`HTTP ${fallbackResponse.status}`);
                 costData = await fallbackResponse.json();
